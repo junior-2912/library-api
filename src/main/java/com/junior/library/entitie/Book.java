@@ -6,24 +6,29 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-public class Book {
+public class Book implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long isbn;
     private String title;
-    private String autor;
+    private String author;
     private BookStatus bookStatus;
 
     public Book() {
     }
 
-    public Book(Long isbn, String title, String autor, BookStatus bookStatus) {
+    public Book(Long isbn, String title, String author, BookStatus bookStatus) {
         this.isbn = isbn;
         this.title = title;
-        this.autor = autor;
+        this.author = author;
         this.bookStatus = bookStatus;
     }
 
@@ -56,12 +61,12 @@ public class Book {
         this.title = title;
     }
 
-    public String getAutor() {
-        return autor;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setAutor(String autor) {
-        this.autor = autor;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     public BookStatus getBookStatus() {
