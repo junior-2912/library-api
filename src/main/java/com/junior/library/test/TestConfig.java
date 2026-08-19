@@ -1,14 +1,18 @@
 package com.junior.library.test;
 
 import com.junior.library.entitie.Book;
+import com.junior.library.entitie.Loan;
 import com.junior.library.entitie.User;
 import com.junior.library.enums.BookStatus;
+import com.junior.library.enums.LoanStatus;
 import com.junior.library.repository.BookRepository;
+import com.junior.library.repository.LoanRepository;
 import com.junior.library.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 
 @Configuration
@@ -19,6 +23,9 @@ public class TestConfig implements CommandLineRunner {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private LoanRepository loanRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -34,7 +41,13 @@ public class TestConfig implements CommandLineRunner {
         User u4 = new User(null, "Mariah Robert", null);
         User u5 = new User(null, "Will Clawer", null);
 
+        Loan l1 = new Loan(null, u2, b4, LocalDate.now(), LocalDate.parse("2026-10-01"), LoanStatus.ACTIVE);
+        Loan l2 = new Loan(null, u1, b2, LocalDate.now(), LocalDate.parse("2026-11-01"), LoanStatus.ACTIVE);
+        Loan l3 = new Loan(null, u5, b5, LocalDate.now(), LocalDate.parse("2026-12-01"), LoanStatus.ACTIVE);
+
+
         bookRepository.saveAll(Arrays.asList(b1, b2, b3, b4, b5));
         userRepository.saveAll(Arrays.asList(u1, u2, u3, u4, u5));
+        loanRepository.saveAll(Arrays.asList(l1, l2, l3));
     }
 }
