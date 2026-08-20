@@ -1,6 +1,6 @@
-package com.junior.library.repository;
+package com.junior.library.repositories;
 
-import com.junior.library.entitie.Book;
+import com.junior.library.entities.Book;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
