@@ -1,5 +1,6 @@
 package com.junior.library.entitie;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serial;
@@ -21,13 +22,16 @@ public class User implements Serializable {
     private String name;
 
 
-    @OneToMany
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user")
+    // ORM feito usando a coluna user da classe Loan, pois uma lista não consegue guardar uma PK
     private List<Loan> loans = new ArrayList<>();
 
-    public User(Long id, String name, List<Loan> loans) {
+    // Contrutor não recebe a lista de Loans, loans é adicionado através de addLoan()
+    public User(Long id, String name) {
         this.id = id;
         this.name = name;
-        this.loans = loans;
     }
 
     public User() {

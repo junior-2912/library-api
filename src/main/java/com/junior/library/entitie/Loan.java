@@ -1,5 +1,6 @@
 package com.junior.library.entitie;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.junior.library.enums.LoanStatus;
 import jakarta.persistence.*;
 
@@ -18,6 +19,8 @@ public class Loan implements Serializable {
     private Long id;
 
     @ManyToOne
+    // Criando uma join column para o relacionamento bidirecional das classes Loan e User
+    @JoinColumn(name = "user_id")
     private User user;
 
     @OneToOne
