@@ -1,6 +1,5 @@
 package com.junior.library.entitie;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.junior.library.enums.LoanStatus;
 import jakarta.persistence.*;
 

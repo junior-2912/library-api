@@ -24,4 +24,11 @@ public class LoanService {
         return loanRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Loan not found!"));
     }
 
+    public Loan save(Loan loan) {
+        return loanRepository.save(loan);
+    }
+
+    public List<Loan> saveAll(List<Loan> loans) {
+        return loanRepository.saveAll(loans);
+    }
 }

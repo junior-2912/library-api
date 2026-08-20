@@ -2,20 +2,15 @@ package com.junior.library.controller;
 
 import com.junior.library.entitie.Loan;
 import com.junior.library.service.LoanService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/loan")
+@RequestMapping("/loans")
 public class LoanResource {
 
-    @Autowired
     private final LoanService loanService;
 
     public LoanResource(LoanService loanService) {
@@ -32,5 +27,17 @@ public class LoanResource {
     public ResponseEntity<Loan> findById(@PathVariable Long id) {
         Loan byId = loanService.findById(id);
         return ResponseEntity.ok(byId);
+    }
+
+    @PostMapping
+    public ResponseEntity<Loan> save(@RequestBody Loan loan) {
+        Loan save = loanService.save(loan);
+        return ResponseEntity.ok(save);
+    }
+
+    @PostMapping("/batch")
+    public ResponseEntity<List<Loan>> saveAll(@RequestBody List<Loan> loans) {
+        List<Loan> loans1 = loanService.saveAll(loans);
+        return ResponseEntity.ok(loans1);
     }
 }
