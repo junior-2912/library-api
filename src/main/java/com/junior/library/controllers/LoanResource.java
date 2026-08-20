@@ -1,7 +1,7 @@
-package com.junior.library.controller;
+package com.junior.library.controllers;
 
-import com.junior.library.entitie.Loan;
-import com.junior.library.service.LoanService;
+import com.junior.library.entities.Loan;
+import com.junior.library.services.LoanService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

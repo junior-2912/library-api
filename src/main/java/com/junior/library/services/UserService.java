@@ -1,7 +1,7 @@
-package com.junior.library.service;
+package com.junior.library.services;
 
-import com.junior.library.entitie.User;
-import com.junior.library.repository.UserRepository;
+import com.junior.library.entities.User;
+import com.junior.library.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

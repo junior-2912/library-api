@@ -1,7 +1,7 @@
-package com.junior.library.service;
+package com.junior.library.services;
 
-import com.junior.library.entitie.Book;
-import com.junior.library.repository.BookRepository;
+import com.junior.library.entities.Book;
+import com.junior.library.repositories.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +28,6 @@ public class BookService {
 
     public Book saveBook(Book book) {
         return bookRepository.save(book);
-
     }
 
     public List<Book> saveAll(List<Book> books) {

@@ -1,7 +1,7 @@
-package com.junior.library.controller;
+package com.junior.library.controllers;
 
-import com.junior.library.entitie.User;
-import com.junior.library.service.UserService;
+import com.junior.library.entities.User;
+import com.junior.library.services.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

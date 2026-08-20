@@ -1,7 +1,7 @@
-package com.junior.library.controller;
+package com.junior.library.controllers;
 
-import com.junior.library.entitie.Book;
-import com.junior.library.service.BookService;
+import com.junior.library.entities.Book;
+import com.junior.library.services.BookService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,13 +1,13 @@
 package com.junior.library.test;
 
-import com.junior.library.entitie.Book;
-import com.junior.library.entitie.Loan;
-import com.junior.library.entitie.User;
+import com.junior.library.entities.Book;
+import com.junior.library.entities.Loan;
+import com.junior.library.entities.User;
 import com.junior.library.enums.BookStatus;
 import com.junior.library.enums.LoanStatus;
-import com.junior.library.repository.BookRepository;
-import com.junior.library.repository.LoanRepository;
-import com.junior.library.repository.UserRepository;
+import com.junior.library.repositories.BookRepository;
+import com.junior.library.repositories.LoanRepository;
+import com.junior.library.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -44,10 +44,6 @@ public class TestConfig implements CommandLineRunner {
         Loan l1 = new Loan(null, u2, b4, LocalDate.now(), LocalDate.parse("2026-10-01"), LoanStatus.ACTIVE);
         Loan l2 = new Loan(null, u1, b2, LocalDate.now(), LocalDate.parse("2026-11-01"), LoanStatus.ACTIVE);
         Loan l3 = new Loan(null, u5, b5, LocalDate.now(), LocalDate.parse("2026-12-01"), LoanStatus.ACTIVE);
-
-        u1.addLoan(l2);
-        u2.addLoan(l1);
-        u5.addLoan(l3);
 
 
         bookRepository.saveAll(Arrays.asList(b1, b2, b3, b4, b5));
