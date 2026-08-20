@@ -27,7 +27,11 @@ public class BookService {
     }
 
     public Book saveBook(Book book) {
-        bookRepository.save(book);
-        return book;
+        return bookRepository.save(book);
+
+    }
+
+    public List<Book> saveAll(List<Book> books) {
+        return bookRepository.saveAll(books);
     }
 }

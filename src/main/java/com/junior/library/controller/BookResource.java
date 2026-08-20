@@ -2,17 +2,15 @@ package com.junior.library.controller;
 
 import com.junior.library.entitie.Book;
 import com.junior.library.service.BookService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/book")
+@RequestMapping("/books")
 public class BookResource {
 
-    @Autowired
     private final BookService bookService;
 
     public BookResource(BookService bookService) {
@@ -34,5 +32,11 @@ public class BookResource {
     public ResponseEntity<Book> save(@RequestBody Book book) {
         Book savedBook = bookService.saveBook(book);
         return ResponseEntity.ok(savedBook);
+    }
+
+    @PostMapping("/batch")
+    public ResponseEntity<List<Book>> saveAll(@RequestBody List<Book> books) {
+        List<Book> books1 = bookService.saveAll(books);
+        return ResponseEntity.ok(books1);
     }
 }
