@@ -30,7 +30,7 @@ public class BookResource {
         return ResponseEntity.ok().body(book);
     }
 
-    @PostMapping()
+    @PostMapping
     public ResponseEntity<Book> save(@RequestBody Book book) {
         Book savedBook = bookService.saveBook(book);
         return ResponseEntity.ok(savedBook);
