@@ -2,17 +2,14 @@ package com.junior.library.service;
 
 import com.junior.library.entitie.User;
 import com.junior.library.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @Service
 public class UserService {
 
-    @Autowired
     private final UserRepository userRepository;
 
     public UserService(UserRepository userRepository) {
@@ -25,5 +22,13 @@ public class UserService {
 
     public User findById(Long id) {
         return userRepository.findById(id).orElseThrow(() -> new NoSuchElementException("User not found!"));
+    }
+
+    public User save(User user) {
+        return userRepository.save(user);
+    }
+
+    public List<User> saveAll(List<User> users) {
+        return userRepository.saveAll(users);
     }
 }
