@@ -1,12 +1,9 @@
-package com.junior.library.entitie;
+package com.junior.library.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -22,12 +19,6 @@ public class User implements Serializable {
     private String name;
 
 
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "user")
-    // ORM feito usando a coluna user da classe Loan, pois uma lista não consegue guardar uma PK
-    private List<Loan> loans = new ArrayList<>();
-
     // Contrutor não recebe a lista de Loans, loans é adicionado através de addLoan()
     public User(Long id, String name) {
         this.id = id;
@@ -35,10 +26,6 @@ public class User implements Serializable {
     }
 
     public User() {
-    }
-
-    public int getLoanQuantity() {
-        return loans.size();
     }
 
     public String getName() {
@@ -55,22 +42,6 @@ public class User implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<Loan> getLoans() {
-        return loans;
-    }
-
-    public void setLoans(List<Loan> loans) {
-        this.loans = loans;
-    }
-
-    public boolean addLoan(Loan loan) {
-        return loans.add(loan);
-    }
-
-    public boolean removeLoan(Loan loan) {
-        return loans.remove(loan);
     }
 
     @Override
