@@ -76,4 +76,8 @@ public class Book implements Serializable {
     public void setBookStatus(BookStatus bookStatus) {
         this.bookStatus = bookStatus;
     }
+
+    public void refund() {
+        setBookStatus(BookStatus.AVAILABLE);
+    }
 }

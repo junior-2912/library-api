@@ -2,13 +2,9 @@ package com.junior.library.controller;
 
 import com.junior.library.entitie.Book;
 import com.junior.library.service.BookService;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -32,5 +28,11 @@ public class BookResource {
     public ResponseEntity<Book> findById(@PathVariable Long id) {
         Book book = bookService.findById(id);
         return ResponseEntity.ok().body(book);
+    }
+
+    @PostMapping()
+    public ResponseEntity<Book> save(@RequestBody Book book) {
+        Book savedBook = bookService.saveBook(book);
+        return ResponseEntity.ok(savedBook);
     }
 }

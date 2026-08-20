@@ -25,4 +25,9 @@ public class BookService {
     public Book findById(Long id) {
         return bookRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Book not found!"));
     }
+
+    public Book saveBook(Book book) {
+        bookRepository.save(book);
+        return book;
+    }
 }
