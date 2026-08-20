@@ -1,4 +1,4 @@
-package com.junior.library.entitie;
+package com.junior.library.entities;
 
 import com.junior.library.enums.BookStatus;
 import jakarta.persistence.Entity;
@@ -30,6 +30,14 @@ public class Book implements Serializable {
         this.title = title;
         this.author = author;
         this.bookStatus = bookStatus;
+    }
+
+    public void refund() {
+        setBookStatus(BookStatus.AVAILABLE);
+    }
+
+    public void lend() {
+        setBookStatus(BookStatus.BORROWED);
     }
 
     @Override
@@ -77,7 +85,5 @@ public class Book implements Serializable {
         this.bookStatus = bookStatus;
     }
 
-    public void refund() {
-        setBookStatus(BookStatus.AVAILABLE);
-    }
+
 }
