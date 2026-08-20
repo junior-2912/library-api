@@ -1,4 +1,4 @@
-package com.junior.library.entitie;
+package com.junior.library.entities;
 
 import com.junior.library.enums.LoanStatus;
 import jakarta.persistence.*;
@@ -17,13 +17,15 @@ public class Loan implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // Relacionamento unidirecional: Loan conhece User, mas User não conhece Loan
     @ManyToOne
-    // Criando uma join column para o relacionamento bidirecional das classes Loan e User
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "isbn_book")
     private Book book;
+
     private LocalDate loanDate;
     private LocalDate returnDate;
 
@@ -69,21 +71,42 @@ public class Loan implements Serializable {
         this.loanStatus = loanStatus;
     }
 
-    public void finalizar(){
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
+    }
+
+    public void setLoanDate(LocalDate loanDate) {
+        this.loanDate = loanDate;
+    }
+
+    public void setReturnDate(LocalDate returnDate) {
+        this.returnDate = returnDate;
+    }
+
+    public void finalizar() {
         loanStatus = LoanStatus.FINISHED;
         book.refund();
     }
+
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
 
-        Loan that = (Loan) o;
-        return Objects.equals(id, that.id);
+        Loan loan = (Loan) o;
+        return Objects.equals(id, loan.id);
     }
 
     @Override
     public int hashCode() {
-        return id.hashCode();
+        return Objects.hashCode(id);
     }
 }
