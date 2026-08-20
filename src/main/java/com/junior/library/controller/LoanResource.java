@@ -5,6 +5,7 @@ import com.junior.library.service.LoanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,5 +26,11 @@ public class LoanResource {
     public ResponseEntity<List<Loan>> findAll() {
         List<Loan> all = loanService.findAll();
         return ResponseEntity.ok(all);
+    }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Loan> findById(@PathVariable Long id) {
+        Loan byId = loanService.findById(id);
+        return ResponseEntity.ok(byId);
     }
 }

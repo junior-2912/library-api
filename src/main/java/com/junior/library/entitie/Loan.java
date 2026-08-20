@@ -72,7 +72,7 @@ public class Loan implements Serializable {
 
     public void finalizar(){
         loanStatus = LoanStatus.FINISHED;
-        // TODO - make the book method -> refund()
+        book.refund();
     }
 
     @Override
