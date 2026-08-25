@@ -42,7 +42,7 @@ public class TestConfig implements CommandLineRunner {
         User u5 = new User(null, "Will Clawer");
 
         Loan l1 = new Loan(null, u2, b4, LocalDate.now(), LocalDate.parse("2026-10-01"), LoanStatus.ACTIVE);
-        Loan l2 = new Loan(null, u1, b2, LocalDate.now(), LocalDate.parse("2026-11-01"), LoanStatus.ACTIVE);
+        Loan l2 = new Loan(null, u1, b2, LocalDate.now(), LocalDate.parse("2026-06-01"), LoanStatus.ACTIVE);
         Loan l3 = new Loan(null, u5, b5, LocalDate.now(), LocalDate.parse("2026-12-01"), LoanStatus.ACTIVE);
 
 
