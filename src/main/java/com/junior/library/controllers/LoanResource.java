@@ -1,5 +1,6 @@
 package com.junior.library.controllers;
 
+import com.junior.library.entities.Book;
 import com.junior.library.entities.Loan;
 import com.junior.library.services.LoanService;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +30,12 @@ public class LoanResource {
         return ResponseEntity.ok(byId);
     }
 
+    @GetMapping("late")
+    public ResponseEntity<List<Book>> findLateBooks() {
+        List<Book> lateBooks = loanService.findLateBooks();
+        return ResponseEntity.ok(lateBooks);
+    }
+
     @PostMapping
     public ResponseEntity<Loan> save(@RequestBody Loan loan) {
         Loan save = loanService.save(loan);
@@ -39,5 +46,13 @@ public class LoanResource {
     public ResponseEntity<List<Loan>> saveAll(@RequestBody List<Loan> loans) {
         List<Loan> loans1 = loanService.saveAll(loans);
         return ResponseEntity.ok(loans1);
+    }
+
+
+//  TODO trocar para @PatchMapping,  e mudar o URI do endpoint.
+    @PostMapping("finish/{id}")
+    public ResponseEntity<Loan> finishLoan(@PathVariable Long id) {
+        Loan loan = loanService.finishLoan(id);
+        return ResponseEntity.ok(loan);
     }
 }
