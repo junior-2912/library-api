@@ -4,11 +4,13 @@ import com.junior.library.entities.Book;
 import com.junior.library.entities.Loan;
 import com.junior.library.entities.User;
 import com.junior.library.enums.BookStatus;
+import com.junior.library.enums.LoanStatus;
 import com.junior.library.exceptions.BookIsNotAvailableException;
 import com.junior.library.repositories.LoanRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -37,7 +39,7 @@ public class LoanService {
 
         // Regra de negócio: Livro não pode ser emprestado novamente enquanto o empréstimo estiver ativo.
         Book loanBook = bookService.findById(loan.getBook().getIsbn());
-        if (!loanBook.getBookStatus().equals(BookStatus.AVAILABLE)) {
+        if (loanBook.getBookStatus().equals(BookStatus.BORROWED)) {
             throw new BookIsNotAvailableException("The book is borrowed");
         }
         loanBook.lend();
@@ -49,5 +51,20 @@ public class LoanService {
 
     public List<Loan> saveAll(List<Loan> loans) {
         return loanRepository.saveAll(loans);
+    }
+
+    public List<Book> findLateBooks() {
+        return loanRepository.findAll().stream()
+                .filter(l -> l.getLoanStatus().equals(LoanStatus.ACTIVE))
+                .filter(l -> l.getReturnDate().isBefore(LocalDate.now()))
+                .map(Loan::getBook)
+                .toList();
+    }
+
+    @Transactional
+    public Loan finishLoan(Long id) {
+        Loan loan = findById(id);
+        loan.finish(); //com esse metodo loanStatus = .FINISHED -> e dentro de finish, chama o metodo refund do livro, que faz bookStatus = .AVAILABLE
+        return loan;
     }
 }
