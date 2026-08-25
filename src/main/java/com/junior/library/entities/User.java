@@ -19,7 +19,7 @@ public class User implements Serializable {
     private String name;
 
 
-    // Contrutor não recebe a lista de Loans, loans é adicionado através de addLoan()
+    // Construtor não recebe a lista de Loans, loans é adicionado através de addLoan()
     public User(Long id, String name) {
         this.id = id;
         this.name = name;
