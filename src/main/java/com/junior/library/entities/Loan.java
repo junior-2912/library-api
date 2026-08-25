@@ -91,7 +91,7 @@ public class Loan implements Serializable {
         this.returnDate = returnDate;
     }
 
-    public void finalizar() {
+    public void finish() {
         loanStatus = LoanStatus.FINISHED;
         book.refund();
     }
