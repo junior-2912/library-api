@@ -42,15 +42,7 @@ public class LoanResource {
         return ResponseEntity.ok(save);
     }
 
-    @PostMapping("/batch")
-    public ResponseEntity<List<Loan>> saveAll(@RequestBody List<Loan> loans) {
-        List<Loan> loans1 = loanService.saveAll(loans);
-        return ResponseEntity.ok(loans1);
-    }
-
-
-//  TODO trocar para @PatchMapping,  e mudar o URI do endpoint.
-    @PostMapping("finish/{id}")
+    @PatchMapping("{id}/finish")
     public ResponseEntity<Loan> finishLoan(@PathVariable Long id) {
         Loan loan = loanService.finishLoan(id);
         return ResponseEntity.ok(loan);
