@@ -1,5 +1,6 @@
 package com.junior.library.controllers;
 
+import com.junior.library.dto.LoanRequestDTO;
 import com.junior.library.entities.Book;
 import com.junior.library.entities.Loan;
 import com.junior.library.services.LoanService;
@@ -37,8 +38,8 @@ public class LoanResource {
     }
 
     @PostMapping
-    public ResponseEntity<Loan> save(@RequestBody Loan loan) {
-        Loan save = loanService.save(loan);
+    public ResponseEntity<Loan> save(@RequestBody LoanRequestDTO loanRequestDTO) {
+        Loan save = loanService.save(loanRequestDTO);
         return ResponseEntity.ok(save);
     }
 
