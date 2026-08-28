@@ -1,5 +1,6 @@
 package com.junior.library.services;
 
+import com.junior.library.dto.LoanRequestDTO;
 import com.junior.library.entities.Book;
 import com.junior.library.entities.Loan;
 import com.junior.library.entities.User;
@@ -38,18 +39,26 @@ public class LoanService {
     }
 
     @Transactional
-    public Loan save(Loan loan) {
+    public Loan save(LoanRequestDTO loanRequestDTO) {
+        User user = userService.findById(loanRequestDTO.getUserId());
+        Book book = bookService.findById(loanRequestDTO.getBookId());
 
-        // Regra de negócio: Livro não pode ser emprestado novamente enquanto o empréstimo estiver ativo.
-        Book loanBook = bookService.findById(loan.getBook().getIsbn());
-        if (loanBook.getBookStatus().equals(BookStatus.BORROWED)) {
+        if (loanRequestDTO.getReturnDate().isBefore(LocalDate.now())) {
+            throw new IllegalArgumentException("Return date cannot be before loan date.");
+        }
+
+        if (book.getBookStatus().equals(BookStatus.BORROWED)) {
             throw new BookIsNotAvailableException("The book is borrowed");
         }
-        loanBook.lend();
+        book.lend();
 
-        User user = userService.findById(loan.getUser().getId());
 
-        loan.setLoanStatus(LoanStatus.ACTIVE);
+        if (user.getLoansQuantity() >= 5) {
+            throw new IllegalArgumentException("User has reached the maximum number of active loans (5).");
+        }
+        user.addActiveLoan();
+
+        Loan loan = new Loan(user, book, loanRequestDTO.getReturnDate());
         return loanRepository.save(loan);
     }
 
@@ -65,7 +74,7 @@ public class LoanService {
     @Transactional
     public Loan finishLoan(Long id) {
         Loan loan = findById(id);
-        loan.finish(); //com esse metodo loanStatus = .FINISHED -> e dentro de finish, chama o metodo refund do livro, que faz bookStatus = .AVAILABLE
+        loan.finish();
         return loan;
     }
 }
