@@ -4,7 +4,6 @@ import com.junior.library.entities.Book;
 import com.junior.library.entities.Loan;
 import com.junior.library.entities.User;
 import com.junior.library.enums.BookStatus;
-import com.junior.library.enums.LoanStatus;
 import com.junior.library.repositories.BookRepository;
 import com.junior.library.repositories.LoanRepository;
 import com.junior.library.repositories.UserRepository;
@@ -41,9 +40,9 @@ public class TestConfig implements CommandLineRunner {
         User u4 = new User(null, "Mariah Robert");
         User u5 = new User(null, "Will Clawer");
 
-        Loan l1 = new Loan(null, u2, b4, LocalDate.now(), LocalDate.parse("2026-10-01"), LoanStatus.ACTIVE);
-        Loan l2 = new Loan(null, u1, b2, LocalDate.now(), LocalDate.parse("2026-06-01"), LoanStatus.ACTIVE);
-        Loan l3 = new Loan(null, u5, b5, LocalDate.now(), LocalDate.parse("2026-12-01"), LoanStatus.ACTIVE);
+        Loan l1 = new Loan(null, u2, b4, LocalDate.parse("2026-10-01"));
+        Loan l2 = new Loan(null, u1, b2,  LocalDate.parse("2026-06-01"));
+        Loan l3 = new Loan(null, u5, b5, LocalDate.parse("2026-12-01"));
 
 
         bookRepository.saveAll(Arrays.asList(b1, b2, b3, b4, b5));
