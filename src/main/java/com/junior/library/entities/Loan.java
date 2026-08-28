@@ -31,16 +31,18 @@ public class Loan implements Serializable {
 
     private LoanStatus loanStatus;
 
-    public Loan(Long id, User user, Book book, LocalDate loanDate, LocalDate returnDate, LoanStatus loanStatus) {
+    public Loan(Long id, User user, Book book, LocalDate returnDate) {
         this.id = id;
         this.user = user;
         this.book = book;
-        this.loanDate = loanDate;
+        this.loanDate = LocalDate.now();
         this.returnDate = returnDate;
-        this.loanStatus = loanStatus;
+        this.loanStatus = LoanStatus.ACTIVE;
     }
 
     public Loan() {
+        this.loanDate = LocalDate.now();
+        this.loanStatus = LoanStatus.ACTIVE;
     }
 
     public User getUser() {
