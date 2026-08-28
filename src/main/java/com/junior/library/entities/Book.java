@@ -32,7 +32,7 @@ public class Book implements Serializable {
         this.bookStatus = bookStatus;
     }
 
-    public void refund() {
+    public void returnBook() {
         setBookStatus(BookStatus.AVAILABLE);
     }
 
