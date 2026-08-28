@@ -31,8 +31,7 @@ public class Loan implements Serializable {
 
     private LoanStatus loanStatus;
 
-    public Loan(Long id, User user, Book book, LocalDate returnDate) {
-        this.id = id;
+    public Loan( User user, Book book, LocalDate returnDate) {
         this.user = user;
         this.book = book;
         this.loanDate = LocalDate.now();
@@ -95,7 +94,8 @@ public class Loan implements Serializable {
 
     public void finish() {
         loanStatus = LoanStatus.FINISHED;
-        book.refund();
+        book.returnBook();
+        user.removeActiveLoan();
     }
 
 
