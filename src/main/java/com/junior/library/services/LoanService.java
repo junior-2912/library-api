@@ -21,9 +21,12 @@ public class LoanService {
 
     private final BookService bookService;
 
-    public LoanService(LoanRepository loanRepository, BookService bookService) {
+    private final UserService userService;
+
+    public LoanService(LoanRepository loanRepository, BookService bookService, UserService userService) {
         this.loanRepository = loanRepository;
         this.bookService = bookService;
+        this.userService = userService;
     }
 
     public List<Loan> findAll() {
@@ -44,14 +47,12 @@ public class LoanService {
         }
         loanBook.lend();
 
-        User user = loan.getUser();
-        loan.setUser(user);
+        User user = userService.findById(loan.getUser().getId());
+
+        loan.setLoanStatus(LoanStatus.ACTIVE);
         return loanRepository.save(loan);
     }
 
-    public List<Loan> saveAll(List<Loan> loans) {
-        return loanRepository.saveAll(loans);
-    }
 
     public List<Book> findLateBooks() {
         return loanRepository.findAll().stream()
