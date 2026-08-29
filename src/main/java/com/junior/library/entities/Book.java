@@ -17,7 +17,9 @@ public class Book implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long isbn;
+    private Long id;
+
+    private String isbn;
     private String title;
     private String author;
     private BookStatus bookStatus;
@@ -25,11 +27,11 @@ public class Book implements Serializable {
     public Book() {
     }
 
-    public Book(Long isbn, String title, String author, BookStatus bookStatus) {
+    public Book(String isbn, String title, String author) {
         this.isbn = isbn;
         this.title = title;
         this.author = author;
-        this.bookStatus = bookStatus;
+        this.bookStatus = BookStatus.AVAILABLE;
     }
 
     public void returnBook() {
@@ -45,19 +47,19 @@ public class Book implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
 
         Book book = (Book) o;
-        return Objects.equals(isbn, book.isbn);
+        return Objects.equals(id, book.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(isbn);
+        return Objects.hashCode(id);
     }
 
-    public Long getIsbn() {
+    public String getIsbn() {
         return isbn;
     }
 
-    public void setIsbn(Long isbn) {
+    public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
 
