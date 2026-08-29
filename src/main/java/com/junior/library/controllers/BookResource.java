@@ -1,5 +1,6 @@
 package com.junior.library.controllers;
 
+import com.junior.library.dto.BookRequestDTO;
 import com.junior.library.entities.Book;
 import com.junior.library.services.BookService;
 import org.springframework.http.ResponseEntity;
@@ -29,14 +30,8 @@ public class BookResource {
     }
 
     @PostMapping
-    public ResponseEntity<Book> save(@RequestBody Book book) {
-        Book savedBook = bookService.saveBook(book);
+    public ResponseEntity<Book> save(@RequestBody BookRequestDTO bookRequestDTO) {
+        Book savedBook = bookService.saveBook(bookRequestDTO);
         return ResponseEntity.ok(savedBook);
-    }
-
-    @PostMapping("/batch")
-    public ResponseEntity<List<Book>> saveAll(@RequestBody List<Book> books) {
-        List<Book> books1 = bookService.saveAll(books);
-        return ResponseEntity.ok(books1);
     }
 }
