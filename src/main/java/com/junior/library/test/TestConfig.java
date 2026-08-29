@@ -3,7 +3,6 @@ package com.junior.library.test;
 import com.junior.library.entities.Book;
 import com.junior.library.entities.Loan;
 import com.junior.library.entities.User;
-import com.junior.library.enums.BookStatus;
 import com.junior.library.repositories.BookRepository;
 import com.junior.library.repositories.LoanRepository;
 import com.junior.library.repositories.UserRepository;
@@ -28,11 +27,11 @@ public class TestConfig implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Book b1 = new Book(null, "Código Limpo", "Robert C. Martin", BookStatus.AVAILABLE);
-        Book b2 = new Book(null, "O Programador Pragmático", "Andrew Hunt e David Thomas", BookStatus.AVAILABLE);
-        Book b3 = new Book(null, "Entendendo Algoritmos", "Aditya T. Bhargava", BookStatus.AVAILABLE);
-        Book b4 = new Book(null, "O Codificador Limpo", "Robert C. Martin", BookStatus.AVAILABLE);
-        Book b5 = new Book(null, "Introdução à Programação com Python", "Nilo Ney Coutinho Menezes", BookStatus.AVAILABLE);
+        Book b1 = new Book("123456789", "Código Limpo", "Robert C. Martin");
+        Book b2 = new Book("123443215", "O Programador Pragmático", "Andrew Hunt e David Thomas");
+        Book b3 = new Book("890324365", "Entendendo Algoritmos", "Aditya T. Bhargava");
+        Book b4 = new Book("296612345", "O Codificador Limpo", "Robert C. Martin");
+        Book b5 = new Book("987654321", "Introdução à Programação com Python", "Nilo Ney Coutinho Menezes");
 
         User u1 = new User(null, "Jhon Carter");
         User u2 = new User(null, "Martin Storm");
