@@ -1,8 +1,8 @@
 package com.junior.library.services;
 
+import com.junior.library.dto.BookRequestDTO;
 import com.junior.library.entities.Book;
 import com.junior.library.repositories.BookRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,7 +10,6 @@ import java.util.NoSuchElementException;
 
 @Service
 public class BookService {
-    @Autowired
     private final BookRepository bookRepository;
 
     public BookService(BookRepository bookRepository) {
@@ -26,11 +25,11 @@ public class BookService {
         return bookRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Book not found!"));
     }
 
-    public Book saveBook(Book book) {
-        return bookRepository.save(book);
+    public Book saveBook(BookRequestDTO bookRequestDTO) {
+        return bookRepository.save(new Book(
+                bookRequestDTO.getIsbn(),
+                bookRequestDTO.getTitle(),
+                bookRequestDTO.getAuthor()));
     }
 
-    public List<Book> saveAll(List<Book> books) {
-        return bookRepository.saveAll(books);
-    }
 }
