@@ -74,6 +74,11 @@ public class LoanService {
     @Transactional
     public Loan finishLoan(Long id) {
         Loan loan = findById(id);
+
+        if (loan.getLoanStatus().equals(LoanStatus.FINISHED)) {
+            throw new IllegalArgumentException("Loan has already been finished!");
+        }
+
         loan.finish();
         return loan;
     }
