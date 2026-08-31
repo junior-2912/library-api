@@ -4,7 +4,9 @@ import com.junior.library.entities.User;
 import com.junior.library.services.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -32,12 +34,12 @@ public class UserResource {
     @PostMapping
     public ResponseEntity<User> save(@RequestBody User user) {
         User saved = userService.save(user);
-        return ResponseEntity.ok(saved);
-    }
 
-    @PostMapping("/batch")
-    public ResponseEntity<List<User>> saveAll(@RequestBody List<User> userList) {
-        List<User> users = userService.saveAll(userList);
-        return ResponseEntity.ok(users);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(saved.getId())
+                .toUri();
+
+        return ResponseEntity.created(uri).body(saved);
     }
 }
