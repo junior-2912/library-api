@@ -1,11 +1,17 @@
 package com.junior.library.dto;
 
+import jakarta.validation.constraints.NotNull;
+
 import java.time.LocalDate;
 
 public class LoanRequestDTO {
-
+    @NotNull
     private Long userId;
+
+    @NotNull
     private Long bookId;
+
+    @NotNull
     private LocalDate returnDate;
 
     public LoanRequestDTO() {
