@@ -3,9 +3,12 @@ package com.junior.library.controllers;
 import com.junior.library.dto.BookRequestDTO;
 import com.junior.library.entities.Book;
 import com.junior.library.services.BookService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -30,8 +33,20 @@ public class BookResource {
     }
 
     @PostMapping
-    public ResponseEntity<Book> save(@RequestBody BookRequestDTO bookRequestDTO) {
+    public ResponseEntity<Book> save(@Valid @RequestBody BookRequestDTO bookRequestDTO) {
         Book savedBook = bookService.saveBook(bookRequestDTO);
-        return ResponseEntity.ok(savedBook);
+
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(savedBook.getId())
+                .toUri();
+
+        return ResponseEntity.created(uri).body(savedBook);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete (@PathVariable Long id) {
+        bookService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }

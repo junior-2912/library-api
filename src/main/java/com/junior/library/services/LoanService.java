@@ -8,7 +8,7 @@ import com.junior.library.enums.BookStatus;
 import com.junior.library.enums.LoanStatus;
 import com.junior.library.exceptions.BookIsNotAvailableException;
 import com.junior.library.exceptions.LoanAlreadyFinishedException;
-import com.junior.library.exceptions.UserHasLotsOfLoansException;
+import com.junior.library.exceptions.LoanIsActiveException;
 import com.junior.library.exceptions.UserLoanLimitExceededException;
 import com.junior.library.repositories.LoanRepository;
 import org.springframework.stereotype.Service;
@@ -84,5 +84,16 @@ public class LoanService {
 
         loan.finish();
         return loan;
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        Loan loan = findById(id);
+
+        if (loan.getLoanStatus().equals(LoanStatus.ACTIVE)) {
+            throw new LoanIsActiveException("Cannot delete a active loan.");
+        }
+
+        loanRepository.delete(loan);
     }
 }

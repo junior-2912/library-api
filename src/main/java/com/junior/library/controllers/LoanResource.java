@@ -4,9 +4,12 @@ import com.junior.library.dto.LoanRequestDTO;
 import com.junior.library.entities.Book;
 import com.junior.library.entities.Loan;
 import com.junior.library.services.LoanService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -38,14 +41,26 @@ public class LoanResource {
     }
 
     @PostMapping
-    public ResponseEntity<Loan> save(@RequestBody LoanRequestDTO loanRequestDTO) {
+    public ResponseEntity<Loan> save(@Valid @RequestBody LoanRequestDTO loanRequestDTO) {
         Loan save = loanService.save(loanRequestDTO);
-        return ResponseEntity.ok(save);
+
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(save.getId())
+                .toUri();
+
+        return ResponseEntity.created(uri).body(save);
     }
 
     @PatchMapping("{id}/finish")
     public ResponseEntity<Loan> finishLoan(@PathVariable Long id) {
         Loan loan = loanService.finishLoan(id);
         return ResponseEntity.ok(loan);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete (@PathVariable Long id) {
+        loanService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }
