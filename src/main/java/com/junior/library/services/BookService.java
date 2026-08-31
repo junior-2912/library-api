@@ -2,11 +2,11 @@ package com.junior.library.services;
 
 import com.junior.library.dto.BookRequestDTO;
 import com.junior.library.entities.Book;
+import com.junior.library.exceptions.ResourceNotFoundException;
 import com.junior.library.repositories.BookRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @Service
 public class BookService {
@@ -22,7 +22,7 @@ public class BookService {
     }
 
     public Book findById(Long id) {
-        return bookRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Book not found!"));
+        return bookRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Book not found!"));
     }
 
     public Book saveBook(BookRequestDTO bookRequestDTO) {

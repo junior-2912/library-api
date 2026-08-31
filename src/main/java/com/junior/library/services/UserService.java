@@ -1,11 +1,11 @@
 package com.junior.library.services;
 
 import com.junior.library.entities.User;
+import com.junior.library.exceptions.ResourceNotFoundException;
 import com.junior.library.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @Service
 public class UserService {
@@ -21,7 +21,7 @@ public class UserService {
     }
 
     public User findById(Long id) {
-        return userRepository.findById(id).orElseThrow(() -> new NoSuchElementException("User not found!"));
+        return userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User not found!"));
     }
 
     public User save(User user) {

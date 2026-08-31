@@ -7,6 +7,9 @@ import com.junior.library.entities.User;
 import com.junior.library.enums.BookStatus;
 import com.junior.library.enums.LoanStatus;
 import com.junior.library.exceptions.BookIsNotAvailableException;
+import com.junior.library.exceptions.LoanAlreadyFinishedException;
+import com.junior.library.exceptions.UserHasLotsOfLoansException;
+import com.junior.library.exceptions.UserLoanLimitExceededException;
 import com.junior.library.repositories.LoanRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -54,7 +57,7 @@ public class LoanService {
 
 
         if (user.getLoansQuantity() >= 5) {
-            throw new IllegalArgumentException("User has reached the maximum number of active loans (5).");
+            throw new UserLoanLimitExceededException("User has reached the maximum number of active loans (5).");
         }
         user.addActiveLoan();
 
@@ -76,7 +79,7 @@ public class LoanService {
         Loan loan = findById(id);
 
         if (loan.getLoanStatus().equals(LoanStatus.FINISHED)) {
-            throw new IllegalArgumentException("Loan has already been finished!");
+            throw new LoanAlreadyFinishedException("Loan has already been finished!");
         }
 
         loan.finish();
