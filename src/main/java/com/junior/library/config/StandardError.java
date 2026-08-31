@@ -3,7 +3,7 @@ package com.junior.library.config;
 import java.time.Instant;
 
 public class StandardError {
-    private Instant instant;
+    private Instant timestamp;
     private Integer status;
     private String error;
     private String message;
@@ -12,12 +12,12 @@ public class StandardError {
     public StandardError() {
     }
 
-    public Instant getInstant() {
-        return instant;
+    public Instant getTimestamp() {
+        return timestamp;
     }
 
-    public void setInstant(Instant instant) {
-        this.instant = instant;
+    public void setTimestamp(Instant timestamp) {
+        this.timestamp = timestamp;
     }
 
     public Integer getStatus() {
