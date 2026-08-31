@@ -1,8 +1,16 @@
 package com.junior.library.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 public class BookRequestDTO {
+    @NotNull
     private String isbn;
+
+    @NotBlank
     private String title;
+
+    @NotBlank
     private String author;
 
     public BookRequestDTO() {
