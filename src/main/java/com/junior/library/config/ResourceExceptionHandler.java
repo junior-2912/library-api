@@ -66,4 +66,6 @@ public class ResourceExceptionHandler {
 
         return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
     }
+
+    // TODO - Adicionar as exceções sobre o método DELETE
 }

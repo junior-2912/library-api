@@ -18,7 +18,7 @@ public class User implements Serializable {
 
     private String name;
 
-    private int loansQuantity;
+    private int activeLoansQuantity;
 
 
     // Construtor não recebe a lista de Loans, loans é adicionado através de addLoan()
@@ -38,20 +38,20 @@ public class User implements Serializable {
         return id;
     }
 
-    public int getLoansQuantity() {
-        return loansQuantity;
+    public int getActiveLoansQuantity() {
+        return activeLoansQuantity;
     }
 
-    public void setLoansQuantity(int loansQuantity) {
-        this.loansQuantity = loansQuantity;
+    public void setActiveLoansQuantity(int activeLoansQuantity) {
+        this.activeLoansQuantity = activeLoansQuantity;
     }
 
     public void addActiveLoan() {
-        this.loansQuantity++;
+        this.activeLoansQuantity++;
     }
 
     public void removeActiveLoan() {
-        this.loansQuantity--;
+        this.activeLoansQuantity--;
     }
 
     public void setId(Long id) {

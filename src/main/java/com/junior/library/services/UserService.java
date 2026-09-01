@@ -2,8 +2,10 @@ package com.junior.library.services;
 
 import com.junior.library.entities.User;
 import com.junior.library.exceptions.ResourceNotFoundException;
+import com.junior.library.exceptions.UserLinkedToLoanException;
 import com.junior.library.repositories.UserRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -28,7 +30,14 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public List<User> saveAll(List<User> users) {
-        return userRepository.saveAll(users);
+    @Transactional
+    public void delete(Long id) {
+        User user = findById(id);
+
+        if (user.getActiveLoansQuantity() != 0) {
+            throw new UserLinkedToLoanException("Cannot delete a user with active loans");
+        }
+
+        userRepository.delete(user);
     }
 }

@@ -56,7 +56,7 @@ public class LoanService {
         book.lend();
 
 
-        if (user.getLoansQuantity() >= 5) {
+        if (user.getActiveLoansQuantity() >= 5) {
             throw new UserLoanLimitExceededException("User has reached the maximum number of active loans (5).");
         }
         user.addActiveLoan();
