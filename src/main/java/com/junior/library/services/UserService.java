@@ -1,5 +1,6 @@
 package com.junior.library.services;
 
+import com.junior.library.dto.UserRequestDTO;
 import com.junior.library.entities.User;
 import com.junior.library.exceptions.ResourceNotFoundException;
 import com.junior.library.exceptions.UserLinkedToLoanException;
@@ -26,7 +27,8 @@ public class UserService {
         return userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User not found!"));
     }
 
-    public User save(User user) {
+    public User save(UserRequestDTO userRequestDTO) {
+        User user = new User(userRequestDTO.getName(), userRequestDTO.getEmail());
         return userRepository.save(user);
     }
 
@@ -39,5 +41,15 @@ public class UserService {
         }
 
         userRepository.delete(user);
+    }
+
+    @Transactional
+    public User update(Long id, UserRequestDTO userRequestDTO) {
+        User user = findById(id);
+
+        user.setName(userRequestDTO.getName());
+        user.setEmail(userRequestDTO.getEmail());
+
+        return user;
     }
 }

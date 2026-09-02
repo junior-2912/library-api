@@ -1,7 +1,9 @@
 package com.junior.library.controllers;
 
+import com.junior.library.dto.UserRequestDTO;
 import com.junior.library.entities.User;
 import com.junior.library.services.UserService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -32,8 +34,8 @@ public class UserResource {
     }
 
     @PostMapping
-    public ResponseEntity<User> save(@RequestBody User user) {
-        User saved = userService.save(user);
+    public ResponseEntity<User> save(@Valid @RequestBody UserRequestDTO userRequestDTO) {
+        User saved = userService.save(userRequestDTO);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
@@ -47,5 +49,11 @@ public class UserResource {
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         userService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<User> update(@PathVariable Long id, @Valid @RequestBody UserRequestDTO userRequestDTO) {
+        User user = userService.update(id, userRequestDTO);
+        return ResponseEntity.ok(user);
     }
 }
