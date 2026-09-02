@@ -57,10 +57,4 @@ public class LoanResource {
         Loan loan = loanService.finishLoan(id);
         return ResponseEntity.ok(loan);
     }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete (@PathVariable Long id) {
-        loanService.delete(id);
-        return ResponseEntity.noContent().build();
-    }
 }

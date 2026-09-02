@@ -46,6 +46,7 @@ public class BookService {
         bookRepository.delete(book);
     }
 
+    @Transactional
     public Book update(Long id, BookRequestDTO bookRequestDTO) {
         Book book = findById(id);
 

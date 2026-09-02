@@ -81,15 +81,4 @@ public class LoanService {
         loan.finish();
         return loan;
     }
-
-    @Transactional
-    public void delete(Long id) {
-        Loan loan = findById(id);
-
-        if (loan.getLoanStatus().equals(LoanStatus.ACTIVE)) {
-            throw new LoanIsActiveException("Cannot delete a active loan.");
-        }
-
-        loanRepository.delete(loan);
-    }
 }
