@@ -29,6 +29,7 @@ public class Loan implements Serializable {
     private LocalDate loanDate;
     private LocalDate returnDate;
 
+    @Enumerated(EnumType.STRING)
     private LoanStatus loanStatus;
 
     public Loan( User user, Book book, LocalDate returnDate) {
