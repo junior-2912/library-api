@@ -33,11 +33,11 @@ public class TestConfig implements CommandLineRunner {
         Book b4 = new Book("296612345", "O Codificador Limpo", "Robert C. Martin");
         Book b5 = new Book("987654321", "Introdução à Programação com Python", "Nilo Ney Coutinho Menezes");
 
-        User u1 = new User(null, "Jhon Carter");
-        User u2 = new User(null, "Martin Storm");
-        User u3 = new User(null, "Jason Jackson");
-        User u4 = new User(null, "Mariah Robert");
-        User u5 = new User(null, "Will Clawer");
+        User u1 = new User("Jhon Carter", "jhon.carter@example.com");
+        User u2 = new User("Martin Storm", "martin.storm@example.com");
+        User u3 = new User("Jason Jackson", "jason.jackson@example.com");
+        User u4 = new User("Mariah Robert", "mariah.robert@example.com");
+        User u5 = new User("Will Clawer", "will.clawer@example.com");
 
         Loan l1 = new Loan(u2, b4, LocalDate.parse("2026-10-01"));
         Loan l2 = new Loan(u1, b2,  LocalDate.parse("2026-06-01"));
