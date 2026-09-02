@@ -1,9 +1,6 @@
 package com.junior.library.config;
 
-import com.junior.library.exceptions.BookIsNotAvailableException;
-import com.junior.library.exceptions.LoanAlreadyFinishedException;
-import com.junior.library.exceptions.ResourceNotFoundException;
-import com.junior.library.exceptions.UserLoanLimitExceededException;
+import com.junior.library.exceptions.*;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,7 +37,6 @@ public class ResourceExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
     }
 
-
     @ExceptionHandler(LoanAlreadyFinishedException.class)
     public ResponseEntity<StandardError> loanAlreadyFinished(LoanAlreadyFinishedException e, HttpServletRequest request) {
         StandardError error = new StandardError();
@@ -67,5 +63,42 @@ public class ResourceExceptionHandler {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
     }
 
-    // TODO - Adicionar as exceções sobre o método DELETE
+    @ExceptionHandler(BookIsBorrowedException.class)
+    public ResponseEntity<StandardError> bookIsBorrowed(BookIsBorrowedException e, HttpServletRequest request) {
+        StandardError error = new StandardError();
+
+        error.setTimestamp(Instant.now());
+        error.setStatus(HttpStatus.CONFLICT.value());
+        error.setError("Conflict");
+        error.setMessage(e.getMessage());
+        error.setPath(request.getRequestURI());
+
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
+    }
+
+    @ExceptionHandler(LoanIsActiveException.class)
+    public ResponseEntity<StandardError> loanIsActive(LoanIsActiveException e, HttpServletRequest request) {
+        StandardError error = new StandardError();
+
+        error.setTimestamp(Instant.now());
+        error.setStatus(HttpStatus.CONFLICT.value());
+        error.setError("Conflict");
+        error.setMessage(e.getMessage());
+        error.setPath(request.getRequestURI());
+
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
+    }
+
+    @ExceptionHandler(UserLinkedToLoanException.class)
+    public ResponseEntity<StandardError> userLinkedToLoan(UserLinkedToLoanException e, HttpServletRequest request) {
+        StandardError error = new StandardError();
+
+        error.setTimestamp(Instant.now());
+        error.setStatus(HttpStatus.CONFLICT.value());
+        error.setError("Conflict");
+        error.setMessage(e.getMessage());
+        error.setPath(request.getRequestURI());
+
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
+    }
 }
