@@ -45,4 +45,14 @@ public class BookService {
 
         bookRepository.delete(book);
     }
+
+    public Book update(Long id, BookRequestDTO bookRequestDTO) {
+        Book book = findById(id);
+
+        book.setIsbn(bookRequestDTO.getIsbn());
+        book.setTitle(bookRequestDTO.getTitle());
+        book.setAuthor(bookRequestDTO.getAuthor());
+
+        return book;
+    }
 }

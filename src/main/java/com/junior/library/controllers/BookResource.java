@@ -49,4 +49,10 @@ public class BookResource {
         bookService.delete(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Book> update(@PathVariable Long id, @RequestBody BookRequestDTO bookRequestDTO) {
+        Book book = bookService.update(id, bookRequestDTO);
+        return ResponseEntity.ok(book);
+    }
 }
