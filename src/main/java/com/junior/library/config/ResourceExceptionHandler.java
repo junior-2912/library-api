@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.time.Instant;
+import java.util.List;
 
 @RestControllerAdvice
 public class ResourceExceptionHandler {
@@ -109,8 +110,16 @@ public class ResourceExceptionHandler {
 
         error.setTimestamp(Instant.now());
         error.setStatus(HttpStatus.BAD_REQUEST.value());
-        error.setError("Bad request");
-        error.setMessage(e.getMessage());
+        error.setError("Validation error");
+        error.setMessage("Invalid fields");
+
+        List<ValidationError> errors = e.getBindingResult()
+                .getFieldErrors()
+                .stream()
+                .map(fieldError -> new ValidationError(fieldError.getField(), fieldError.getDefaultMessage()))
+                .toList();
+
+        error.setErrors(errors);
         error.setPath(request.getRequestURI());
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);

@@ -1,6 +1,8 @@
 package com.junior.library.config;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 public class StandardError {
     private Instant timestamp;
@@ -8,6 +10,7 @@ public class StandardError {
     private String error;
     private String message;
     private String path;
+    private List<ValidationError> errors = new ArrayList<>();
 
     public StandardError() {
     }
@@ -46,6 +49,14 @@ public class StandardError {
 
     public String getPath() {
         return path;
+    }
+
+    public List<ValidationError> getErrors() {
+        return List.copyOf(errors);
+    }
+
+    public void setErrors(List<ValidationError> errors) {
+        this.errors = errors;
     }
 
     public void setPath(String path) {
