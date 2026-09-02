@@ -17,14 +17,15 @@ public class User implements Serializable {
     private Long id;
 
     private String name;
+    private String email;
 
     private int activeLoansQuantity;
 
 
     // Construtor não recebe a lista de Loans, loans é adicionado através de addLoan()
-    public User(Long id, String name) {
-        this.id = id;
+    public User(String name, String email) {
         this.name = name;
+        this.email = email;
     }
 
     public User() {
@@ -36,6 +37,14 @@ public class User implements Serializable {
 
     public Long getId() {
         return id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public int getActiveLoansQuantity() {
