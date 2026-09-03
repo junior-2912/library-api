@@ -3,6 +3,7 @@ package com.junior.library.controllers;
 import com.junior.library.dto.LoanRequestDTO;
 import com.junior.library.entities.Book;
 import com.junior.library.entities.Loan;
+import com.junior.library.entities.User;
 import com.junior.library.services.LoanService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -34,10 +35,16 @@ public class LoanResource {
         return ResponseEntity.ok(byId);
     }
 
-    @GetMapping("late")
+    @GetMapping("/late")
     public ResponseEntity<List<Book>> findLateBooks() {
         List<Book> lateBooks = loanService.findLateBooks();
         return ResponseEntity.ok(lateBooks);
+    }
+
+    @GetMapping("/users")
+    public ResponseEntity<List<User>> findUsersWithTheMostLoans() {
+        List<User> list = loanService.findUsersWithTheMostLoans();
+        return ResponseEntity.ok(list);
     }
 
     @PostMapping

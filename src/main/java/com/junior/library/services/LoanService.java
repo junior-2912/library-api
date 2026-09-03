@@ -12,7 +12,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class LoanService {
@@ -67,6 +71,19 @@ public class LoanService {
                 .filter(l -> l.getLoanStatus().equals(LoanStatus.ACTIVE))
                 .filter(l -> l.getReturnDate().isBefore(LocalDate.now()))
                 .map(Loan::getBook)
+                .toList();
+    }
+
+    public List<User> findUsersWithTheMostLoans() {
+        return findAll()
+                .stream()
+                .collect(Collectors.groupingBy(Loan::getUser, Collectors.counting()))
+                .entrySet()
+                .stream()
+                .sorted(Map.Entry.comparingByValue(Collections.reverseOrder()))
+                .peek(entry -> System.out.println(entry.getKey().getName() + " ->" + entry.getValue()))
+                .map(Map.Entry::getKey)
+                .limit(5)
                 .toList();
     }
 
