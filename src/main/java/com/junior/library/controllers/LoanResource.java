@@ -1,6 +1,8 @@
 package com.junior.library.controllers;
 
+import com.junior.library.dto.BookRankingDTO;
 import com.junior.library.dto.LoanRequestDTO;
+import com.junior.library.dto.UserRankingDTO;
 import com.junior.library.entities.Book;
 import com.junior.library.entities.Loan;
 import com.junior.library.entities.User;
@@ -42,9 +44,13 @@ public class LoanResource {
     }
 
     @GetMapping("/users")
-    public ResponseEntity<List<User>> findUsersWithTheMostLoans() {
-        List<User> list = loanService.findUsersWithTheMostLoans();
-        return ResponseEntity.ok(list);
+    public ResponseEntity<List<UserRankingDTO>> findUsersWithTheMostLoans() {
+        return ResponseEntity.ok(loanService.findUsersWithTheMostLoans());
+    }
+
+    @GetMapping("/books")
+    public ResponseEntity<List<BookRankingDTO>> findMoreBorrowedBooks() {
+        return ResponseEntity.ok(loanService.findMoreBorrowedBooks());
     }
 
     @PostMapping

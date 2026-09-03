@@ -1,6 +1,8 @@
 package com.junior.library.services;
 
+import com.junior.library.dto.BookRankingDTO;
 import com.junior.library.dto.LoanRequestDTO;
+import com.junior.library.dto.UserRankingDTO;
 import com.junior.library.entities.Book;
 import com.junior.library.entities.Loan;
 import com.junior.library.entities.User;
@@ -74,16 +76,35 @@ public class LoanService {
                 .toList();
     }
 
-    public List<User> findUsersWithTheMostLoans() {
+    public List<UserRankingDTO> findUsersWithTheMostLoans() {
         return findAll()
                 .stream()
                 .collect(Collectors.groupingBy(Loan::getUser, Collectors.counting()))
                 .entrySet()
                 .stream()
                 .sorted(Map.Entry.comparingByValue(Collections.reverseOrder()))
-                .peek(entry -> System.out.println(entry.getKey().getName() + " ->" + entry.getValue()))
-                .map(Map.Entry::getKey)
                 .limit(5)
+                .map(entry -> new UserRankingDTO(
+                        entry.getKey().getId(),
+                        entry.getKey().getName(),
+                        entry.getValue()
+                ))
+                .toList();
+    }
+
+    public List<BookRankingDTO> findMoreBorrowedBooks() {
+        return findAll()
+                .stream()
+                .collect(Collectors.groupingBy(Loan::getBook, Collectors.counting()))
+                .entrySet()
+                .stream()
+                .sorted(Map.Entry.comparingByValue(Collections.reverseOrder()))
+                .limit(5)
+                .map(entry -> new BookRankingDTO(
+                        entry.getKey().getIsbn(),
+                        entry.getKey().getTitle(),
+                        entry.getValue()
+                ))
                 .toList();
     }
 
