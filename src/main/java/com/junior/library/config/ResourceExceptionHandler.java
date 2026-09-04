@@ -113,15 +113,28 @@ public class ResourceExceptionHandler {
         error.setError("Validation error");
         error.setMessage("Invalid fields");
 
-        List<ValidationError> errors = e.getBindingResult()
+        List<ValidationError> validationErrors = e.getBindingResult()
                 .getFieldErrors()
                 .stream()
                 .map(fieldError -> new ValidationError(fieldError.getField(), fieldError.getDefaultMessage()))
                 .toList();
 
-        error.setErrors(errors);
+        error.setErrors(validationErrors);
         error.setPath(request.getRequestURI());
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<StandardError> illegalArgument(IllegalArgumentException e, HttpServletRequest request) {
+        StandardError error = new StandardError();
+
+        error.setTimestamp(Instant.now());
+        error.setStatus(HttpStatus.CONFLICT.value());
+        error.setError("Conflict");
+        error.setMessage(e.getMessage());
+        error.setPath(request.getRequestURI());
+
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
     }
 }

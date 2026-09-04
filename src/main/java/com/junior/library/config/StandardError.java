@@ -10,7 +10,7 @@ public class StandardError {
     private String error;
     private String message;
     private String path;
-    private List<ValidationError> errors = new ArrayList<>();
+    private List<ValidationError> validationErrors = new ArrayList<>();
 
     public StandardError() {
     }
@@ -52,11 +52,11 @@ public class StandardError {
     }
 
     public List<ValidationError> getErrors() {
-        return List.copyOf(errors);
+        return List.copyOf(validationErrors);
     }
 
-    public void setErrors(List<ValidationError> errors) {
-        this.errors = errors;
+    public void setErrors(List<ValidationError> validationErrors) {
+        this.validationErrors = validationErrors;
     }
 
     public void setPath(String path) {
