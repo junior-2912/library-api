@@ -44,8 +44,8 @@ public class TestConfig implements CommandLineRunner {
         Loan l3 = new Loan(u5, b5, LocalDate.parse("2026-12-01"));
 
 
-        bookRepository.saveAll(Arrays.asList(b1, b2, b3, b4, b5));
-        userRepository.saveAll(Arrays.asList(u1, u2, u3, u4, u5));
-        loanRepository.saveAll(Arrays.asList(l1, l2, l3));
+//        bookRepository.saveAll(Arrays.asList(b1, b2, b3, b4, b5));
+//        userRepository.saveAll(Arrays.asList(u1, u2, u3, u4, u5));
+//        loanRepository.saveAll(Arrays.asList(l1, l2, l3));
     }
 }
