@@ -358,13 +358,13 @@ The API uses Jakarta Bean Validation in request DTOs.
 
 For example:
 
-@NotNull
+@NotNull  
 private Long userId;
 
-@NotNull
+@NotNull  
 private Long bookId;
 
-@NotNull
+@NotNull  
 private LocalDate returnDate;
 
 The controller uses:
