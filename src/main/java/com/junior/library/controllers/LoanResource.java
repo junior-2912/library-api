@@ -5,7 +5,6 @@ import com.junior.library.dto.LoanRequestDTO;
 import com.junior.library.dto.UserRankingDTO;
 import com.junior.library.entities.Book;
 import com.junior.library.entities.Loan;
-import com.junior.library.entities.User;
 import com.junior.library.services.LoanService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
