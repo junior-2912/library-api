@@ -6,8 +6,10 @@ import jakarta.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
-
+// TODO - Dar um jeito de excluir a tabela de testes do banco para deixar os dados com integridade
+// TODO - Finalizar a configuração do banco
 @Entity
+@Table(name = "book")
 public class Book implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
