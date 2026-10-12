@@ -28,6 +28,10 @@ public class BookService {
         return bookRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Book not found!"));
     }
 
+    public List<Book> findByName(String name) {
+        return bookRepository.findAllByNameContainingIgnoreCase(name);
+    }
+
     public Book saveBook(BookRequestDTO bookRequestDTO) {
         return bookRepository.save(new Book(
                 bookRequestDTO.getIsbn(),
