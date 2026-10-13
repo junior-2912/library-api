@@ -1,6 +1,7 @@
 package com.junior.library.entities;
 
 import com.junior.library.enums.LoanStatus;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 
 import java.io.Serial;
@@ -27,6 +28,7 @@ public class Loan implements Serializable {
     private Book book;
 
     private LocalDate loanDate;
+    @Column(nullable = false)
     private LocalDate returnDate;
 
     @Enumerated(EnumType.STRING)

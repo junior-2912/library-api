@@ -11,5 +11,5 @@ import java.util.Optional;
 @Repository
 public interface BookRepository extends JpaRepository<Book, Long> {
     @Query
-    List<Book> findAllByNameContainingIgnoreCase(String name);
+    List<Book> findAllByTitleContainingIgnoreCase(String title);
 }

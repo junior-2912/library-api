@@ -19,7 +19,9 @@ public class Book implements Serializable {
 
     @Column(unique = true, nullable = false)
     private String isbn;
+    @Column(nullable = false)
     private String title;
+    @Column(nullable = false)
     private String author;
 
     @Enumerated(EnumType.STRING)
@@ -46,14 +48,13 @@ public class Book implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-
         Book book = (Book) o;
-        return Objects.equals(id, book.id);
+        return Objects.equals(id, book.id) && Objects.equals(isbn, book.isbn);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id);
+        return Objects.hash(id, isbn);
     }
 
     public String getIsbn() {

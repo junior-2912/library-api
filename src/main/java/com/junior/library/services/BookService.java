@@ -28,8 +28,8 @@ public class BookService {
         return bookRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Book not found!"));
     }
 
-    public List<Book> findByName(String name) {
-        return bookRepository.findAllByNameContainingIgnoreCase(name);
+    public List<Book> findAllByTitle(String title) {
+        return bookRepository.findAllByTitleContainingIgnoreCase(title);
     }
 
     public Book saveBook(BookRequestDTO bookRequestDTO) {

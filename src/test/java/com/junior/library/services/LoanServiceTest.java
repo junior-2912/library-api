@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
 import org.springframework.util.Assert;
 
 import java.time.LocalDate;
@@ -28,7 +29,7 @@ class LoanServiceTest {
 
         LoanService loanService = new LoanService(mockLoanRepository, mockBookService, mockUserService);
 
-        Book book = new Book("12345672134", "Ze Bucetinha", "maria priquito");
+        Book book = new Book("12345672134", "O Pequeno Principe", "Antoine");
         book.setBookStatus(BookStatus.BORROWED);
         book.setId(100L);
 
@@ -48,11 +49,11 @@ class LoanServiceTest {
         LoanRepository mockLoanRepository = mock(LoanRepository.class);
 
         LoanService loanService = new LoanService(mockLoanRepository, mockBookService, mockUserService);
-        User user = new User("Lebron James", "lebron@gmail.com");
+        User user = new User("User", "userexample@gmail.com");
         user.setId(100L);
         user.setActiveLoansQuantity(userActiveLoans);
 
-        Book book = new Book("12345672134", "Ze Bucetinha", "maria priquito");
+        Book book = new Book("12345672134", "O Pequeno Principe", "Antoine");
         book.setBookStatus(BookStatus.AVAILABLE);
         book.setId(100L);
 
@@ -75,11 +76,11 @@ class LoanServiceTest {
         LoanRepository mockLoanRepository = mock(LoanRepository.class);
 
         LoanService loanService = new LoanService(mockLoanRepository, mockBookService, mockUserService);
-        User user = new User("Lebron James", "lebron@gmail.com");
+        User user = new User("User", "userexample@gmail.com");
         user.setId(100L);
         user.setActiveLoansQuantity(userActiveLoans);
 
-        Book book = new Book("12345672134", "Ze Bucetinha", "maria priquito");
+        Book book = new Book("12345672134", "O pequeno principe", "Antoine");
         book.setBookStatus(BookStatus.AVAILABLE);
         book.setId(100L);
 
@@ -93,17 +94,17 @@ class LoanServiceTest {
     }
 
     @Test
-    public void shouldThrowsExceptionWhenReturnDateisBeforeThenLoanDate() {
+    public void shouldThrowsExceptionWhenReturnDateIsBeforeThenLoanDate() {
         UserService mockUserService = mock(UserService.class);
         BookService mockBookService = mock(BookService.class);
         LoanRepository mockLoanRepository = mock(LoanRepository.class);
 
         LoanService loanService = new LoanService(mockLoanRepository, mockBookService, mockUserService);
-        User user = new User("Lebron James", "lebron@gmail.com");
+        User user = new User("User", "userexample@gmail.com");
         user.setId(100L);
         user.setActiveLoansQuantity(4);
 
-        Book book = new Book("12345672134", "Ze Bucetinha", "maria priquito");
+        Book book = new Book("12345672134", "O pequeno principe", "Antoine");
         book.setBookStatus(BookStatus.AVAILABLE);
         book.setId(100L);
 
@@ -124,11 +125,11 @@ class LoanServiceTest {
         LoanRepository mockLoanRepository = mock(LoanRepository.class);
 
         LoanService loanService = new LoanService(mockLoanRepository, mockBookService, mockUserService);
-        User user = new User("Lebron James", "lebron@gmail.com");
+        User user = new User("User", "userexample@gmail.com");
         user.setId(100L);
         user.setActiveLoansQuantity(4);
 
-        Book book = new Book("12345672134", "Ze Bucetinha", "maria priquito");
+        Book book = new Book("12345672134", "O pequeno principe", "Antoine");
         book.setBookStatus(BookStatus.AVAILABLE);
         book.setId(100L);
 

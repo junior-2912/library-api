@@ -22,8 +22,11 @@ public class BookResource {
     }
 
     @GetMapping
-    public List<Book> findAll() {
-        return bookService.findAll();
+    public ResponseEntity<List<Book>> findAllOrFindAllByTitle(@RequestParam(required = false) String title) {
+        if (title != null && !title.isEmpty()) {
+            return ResponseEntity.ok(bookService.findAllByTitle(title));
+        }
+        return ResponseEntity.ok().body(bookService.findAll());
     }
 
     @GetMapping(value = "/{id}")
