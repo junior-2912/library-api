@@ -12,8 +12,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
-import org.springframework.util.Assert;
 
 import java.time.LocalDate;
 
@@ -22,7 +20,7 @@ import static org.mockito.Mockito.*;
 class LoanServiceTest {
 
     @Test
-    public void shouldNotSaveABorrowedBook() {
+    public void save_shouldNotSaveABorrowedBook() {
         UserService mockUserService = mock(UserService.class);
         BookService mockBookService = mock(BookService.class);
         LoanRepository mockLoanRepository = mock(LoanRepository.class);
@@ -43,7 +41,7 @@ class LoanServiceTest {
 
     @ParameterizedTest
     @ValueSource(ints = {0, 1, 2, 3, 4})
-    public void shouldAllowLoanWhenUserHasLessThanFiveActiveLoans(int userActiveLoans) {
+    public void save_shouldAllowLoanWhenUserHasLessThanFiveActiveLoans(int userActiveLoans) {
         UserService mockUserService = mock(UserService.class);
         BookService mockBookService = mock(BookService.class);
         LoanRepository mockLoanRepository = mock(LoanRepository.class);
@@ -70,7 +68,7 @@ class LoanServiceTest {
 
     @ParameterizedTest
     @ValueSource(ints = {5, 6, 7, 10, 100})
-    public void shouldThrowsExceptionWhenUserHas5OrMoreActiveLoans(int userActiveLoans) {
+    public void save_shouldThrowsExceptionWhenUserHas5OrMoreActiveLoans(int userActiveLoans) {
         UserService mockUserService = mock(UserService.class);
         BookService mockBookService = mock(BookService.class);
         LoanRepository mockLoanRepository = mock(LoanRepository.class);
@@ -94,7 +92,7 @@ class LoanServiceTest {
     }
 
     @Test
-    public void shouldThrowsExceptionWhenReturnDateIsBeforeThenLoanDate() {
+    public void save_shouldThrowsExceptionWhenReturnDateIsBeforeThenLoanDate() {
         UserService mockUserService = mock(UserService.class);
         BookService mockBookService = mock(BookService.class);
         LoanRepository mockLoanRepository = mock(LoanRepository.class);
@@ -119,7 +117,7 @@ class LoanServiceTest {
     }
 
     @Test
-    public void shouldSaveLoanWhenBookIsAvailable() {
+    public void save_shouldSaveLoanWhenBookIsAvailable() {
         UserService mockUserService = mock(UserService.class);
         BookService mockBookService = mock(BookService.class);
         LoanRepository mockLoanRepository = mock(LoanRepository.class);
