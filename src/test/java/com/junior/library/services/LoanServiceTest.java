@@ -131,7 +131,7 @@ class LoanServiceTest {
         book.setBookStatus(BookStatus.AVAILABLE);
         book.setId(100L);
 
-        LoanRequestDTO loanRequestDTO = new LoanRequestDTO(100L, 100L, LocalDate.parse("2026-09-30"));
+        LoanRequestDTO loanRequestDTO = new LoanRequestDTO(100L, 100L, LocalDate.parse("2027-09-30"));
 
         when(mockUserService.findById(100L)).thenReturn(user);
         when(mockBookService.findById(100L)).thenReturn(book);
