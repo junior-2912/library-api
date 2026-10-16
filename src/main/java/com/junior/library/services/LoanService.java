@@ -8,14 +8,16 @@ import com.junior.library.entities.Loan;
 import com.junior.library.entities.User;
 import com.junior.library.enums.BookStatus;
 import com.junior.library.enums.LoanStatus;
-import com.junior.library.exceptions.*;
+import com.junior.library.exceptions.BookIsNotAvailableException;
+import com.junior.library.exceptions.LoanAlreadyFinishedException;
+import com.junior.library.exceptions.ResourceNotFoundException;
+import com.junior.library.exceptions.UserLoanLimitExceededException;
 import com.junior.library.repositories.LoanRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
