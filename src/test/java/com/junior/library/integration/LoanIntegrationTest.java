@@ -51,12 +51,12 @@ public class LoanIntegrationTest {
         String json = objectMapper.writeValueAsString(loanRequestDTO);
 
         mockMvc.perform(post("/loans")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(json))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(json))
                 .andExpect(status().isCreated())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id").exists());
 
-            assertThat(loanRepository.count()).isEqualTo(1);
+        assertThat(loanRepository.count()).isEqualTo(1);
     }
 }
