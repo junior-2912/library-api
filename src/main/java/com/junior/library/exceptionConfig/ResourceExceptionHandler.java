@@ -1,4 +1,4 @@
-package com.junior.library.config;
+package com.junior.library.exceptionConfig;
 
 import com.junior.library.exceptions.*;
 import jakarta.servlet.http.HttpServletRequest;

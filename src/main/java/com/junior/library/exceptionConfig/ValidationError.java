@@ -1,4 +1,4 @@
-package com.junior.library.config;
+package com.junior.library.exceptionConfig;
 
 public class ValidationError {
     private String field;

@@ -1,4 +1,4 @@
-package com.junior.library.config;
+package com.junior.library.exceptionConfig;
 
 import java.time.Instant;
 import java.util.ArrayList;
