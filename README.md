@@ -174,11 +174,11 @@ Request DTOs use Jakarta Bean Validation together with @Valid to reject invalid 
 ```
 src/main/java/com/junior/library
 │
-├── config
 ├── controllers
 ├── dto
 ├── entities
 ├── enums
+├── exceptionConfig
 ├── exceptions
 ├── repositories
 └── services
