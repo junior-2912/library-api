@@ -1,7 +1,9 @@
 package com.junior.library.controllers;
 
 import com.junior.library.dto.UserRequestDTO;
+import com.junior.library.dto.UserResponseDTO;
 import com.junior.library.entities.User;
+import com.junior.library.mapper.UserMapper;
 import com.junior.library.services.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -17,24 +19,27 @@ public class UserResource {
 
     private final UserService userService;
 
-    public UserResource(UserService userService) {
+    private final UserMapper userMapper;
+
+    public UserResource(UserService userService, UserMapper userMapper) {
         this.userService = userService;
+        this.userMapper = userMapper;
     }
 
     @GetMapping
-    public ResponseEntity<List<User>> findAll() {
-        List<User> all = userService.findAll();
+    public ResponseEntity<List<UserResponseDTO>> findAll() {
+        List<UserResponseDTO> all = userMapper.entityListToUserResponseList(userService.findAll());
         return ResponseEntity.ok().body(all);
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<User> findById(@PathVariable Long id) {
-        User byId = userService.findById(id);
+    public ResponseEntity<UserResponseDTO> findById(@PathVariable Long id) {
+        UserResponseDTO byId = userMapper.entityToUserResponse(userService.findById(id));
         return ResponseEntity.ok().body(byId);
     }
 
     @PostMapping
-    public ResponseEntity<User> save(@Valid @RequestBody UserRequestDTO userRequestDTO) {
+    public ResponseEntity<UserResponseDTO> save(@Valid @RequestBody UserRequestDTO userRequestDTO) {
         User saved = userService.save(userRequestDTO);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
@@ -42,7 +47,7 @@ public class UserResource {
                 .buildAndExpand(saved.getId())
                 .toUri();
 
-        return ResponseEntity.created(uri).body(saved);
+        return ResponseEntity.created(uri).body(userMapper.entityToUserResponse(saved));
     }
 
     @DeleteMapping("/{id}")
@@ -52,8 +57,8 @@ public class UserResource {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> update(@PathVariable Long id, @Valid @RequestBody UserRequestDTO userRequestDTO) {
-        User user = userService.update(id, userRequestDTO);
+    public ResponseEntity<UserResponseDTO> update(@PathVariable Long id, @Valid @RequestBody UserRequestDTO userRequestDTO) {
+        UserResponseDTO user = userMapper.entityToUserResponse(userService.update(id, userRequestDTO));
         return ResponseEntity.ok(user);
     }
 }

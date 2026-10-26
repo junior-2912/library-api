@@ -27,11 +27,12 @@ public class UserService {
     }
 
     public User findById(Long id) {
+
         return userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User not found!"));
     }
 
     public User save(UserRequestDTO userRequestDTO) {
-        User user = new User(userRequestDTO.getName(), userRequestDTO.getEmail());
+        User user = userMapper.requestToUserEntity(userRequestDTO);
         return userRepository.save(user);
     }
 
