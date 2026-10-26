@@ -4,6 +4,7 @@ import com.junior.library.dto.UserRequestDTO;
 import com.junior.library.entities.User;
 import com.junior.library.exceptions.ResourceNotFoundException;
 import com.junior.library.exceptions.UserLinkedToLoanException;
+import com.junior.library.mapper.UserMapper;
 import com.junior.library.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,9 +15,11 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final UserMapper userMapper;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, UserMapper userMapper) {
         this.userRepository = userRepository;
+        this.userMapper = userMapper;
     }
 
     public List<User> findAll() {
